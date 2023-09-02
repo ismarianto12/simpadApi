@@ -93,12 +93,12 @@ public class PadController {
     try {
       padservice.removeOne(id);
       Map<String, Object> response = new HashMap<>();
-      response.put("response", "berhasil di hapus");
+      response.put("messages", "berhasil di hapus");
       return ResponseEntity.ok(response);
     } catch (Exception e) {
       // TODO: handle exception
       Map<String, Object> response = new HashMap<>();
-      response.put("gagal", e.getMessage());
+      response.put("messages", e.getMessage());
       return ResponseEntity.ok(response);
     }
   }
