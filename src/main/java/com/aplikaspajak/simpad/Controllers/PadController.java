@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -83,6 +84,21 @@ public class PadController {
       Map<String, Object> response = new HashMap<>();
       response.put("gagal", e);
 
+      return ResponseEntity.ok(response);
+    }
+  }
+
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<Map<String, Object>> deletedata(@PathVariable Long id) {
+    try {
+      padservice.removeOne(id);
+      Map<String, Object> response = new HashMap<>();
+      response.put("response", "berhasil di hapus");
+      return ResponseEntity.ok(response);
+    } catch (Exception e) {
+      // TODO: handle exception
+      Map<String, Object> response = new HashMap<>();
+      response.put("gagal", e.getMessage());
       return ResponseEntity.ok(response);
     }
   }

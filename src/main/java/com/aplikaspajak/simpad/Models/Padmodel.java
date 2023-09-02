@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tmpad")
@@ -23,7 +24,9 @@ public class Padmodel implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @NotNull(message = "Kode Tidak Boleh Kosong")
   private String kode;
+
   private String nama;
   private Double tarif_pajak;
 
