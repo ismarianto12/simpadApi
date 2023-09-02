@@ -70,11 +70,14 @@ public class PadController {
     @PathVariable Long id
   ) {
     try {
-      Padmodel padmodel = padservice.findOne(id);
-      System.out.println(request + "asadsa");
-
+      padservice.findOne(id);
+      //   padmodel.setKode(request.getKode());
+      //   padmodel.setKode(request.getNama());
+      //   padmodel.setTarif_pajak(request.getTarif_pajak());
+      padservice.save(request);
       Map<String, Object> response = new HashMap<>();
-      response.put("data", padmodel);
+      response.put("data", "succes update data");
+
       return ResponseEntity.ok(response);
     } catch (Exception e) {
       Map<String, Object> response = new HashMap<>();
