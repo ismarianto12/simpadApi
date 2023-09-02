@@ -25,6 +25,10 @@ public class Esptpdservice {
     return esptpdrepository.findById(id).get();
   }
 
+  public Estpdmodel findOne(Long id) {
+    return esptpdrepository.findById(id).get();
+  }
+
   public void delete(Long id) {
     esptpdrepository.deleteById(id);
   }
