@@ -5,14 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import org.springframework.web.multipart.MultipartFile;
 
+@Entity
 @Table(name = "esptpd")
 public class Estpdmodel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private MultipartFile bukti_bayar;
+  private String bukti_bayar;
 
   private String bunga;
   private String created_at;
@@ -40,7 +40,7 @@ public class Estpdmodel {
   public Estpdmodel() {}
 
   public Estpdmodel(
-    MultipartFile bukti_bayar,
+    String bukti_bayar,
     String bunga,
     String created_at,
     String created_by,
@@ -89,11 +89,11 @@ public class Estpdmodel {
     this.volume = volume;
   }
 
-  public MultipartFile getBukti_bayar() {
+  public String getBukti_bayar() {
     return bukti_bayar;
   }
 
-  public void setBukti_bayar(MultipartFile bukti_bayar) {
+  public void setBukti_bayar(String bukti_bayar) {
     this.bukti_bayar = bukti_bayar;
   }
 

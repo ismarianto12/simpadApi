@@ -1,7 +1,9 @@
 package com.aplikaspajak.simpad.Controllers;
 
+// import antlr.StringUtils;
 import com.aplikaspajak.simpad.Models.Estpdmodel;
 import com.aplikaspajak.simpad.Services.Esptpdservice;
+import com.aplikaspajak.simpad.Utils.FileUploadUtil;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+// import Fileu
 
 @RestController
 @RequestMapping("api/esptpd")
@@ -37,15 +42,17 @@ public class EsptpdController {
 
   @PostMapping
   public ResponseEntity<Map<String, Object>> insert(
-    @RequestPart MultipartFile file,
-    @RequestPart Estpdmodel esptpdmodel
+    @RequestPart MultipartFile file
+    // @RequestPart Estpdmodel esptpdmodel
   ) {
     try {
       String exampletoken = "testing";
+      String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+      // esptpdmodel.setBukti_bayar(fileName);
+      // esptpdservice.save(esptpdmodel);
+      String uploadDir = "uploads/";
+      FileUploadUtil.saveFile(uploadDir, fileName, file);
 
-      esptpdmodel.setBukti_bayar(file);
-      esptpdservice.uploadSptpd(exampletoken, file);
-      esptpdservice.save(esptpdmodel);
       return ResponseEntity.ok().build();
     } catch (Exception e) {
       Map<String, Object> response = new HashMap<>();
