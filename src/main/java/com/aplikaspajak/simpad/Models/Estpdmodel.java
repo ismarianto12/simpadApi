@@ -5,14 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.springframework.web.multipart.MultipartFile;
 
-@Entity
 @Table(name = "esptpd")
 public class Estpdmodel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private String bukti_bayar;
+  private MultipartFile bukti_bayar;
 
   private String bunga;
   private String created_at;
@@ -39,11 +39,61 @@ public class Estpdmodel {
 
   public Estpdmodel() {}
 
-  public String getBukti_bayar() {
+  public Estpdmodel(
+    MultipartFile bukti_bayar,
+    String bunga,
+    String created_at,
+    String created_by,
+    String denda,
+    String id,
+    String is_deleted,
+    String jumlah,
+    String kd_rekening,
+    String keterangan,
+    String ntb,
+    String omset,
+    String pad_tahun_id,
+    String ref_id,
+    String satuan,
+    String status,
+    String tahun,
+    String tanggal_lapor,
+    String tmpad_id,
+    String tmwajib_pajak_id,
+    String updated_at,
+    String updated_by,
+    String volume
+  ) {
+    this.bukti_bayar = bukti_bayar;
+    this.bunga = bunga;
+    this.created_at = created_at;
+    this.created_by = created_by;
+    this.denda = denda;
+    this.id = id;
+    this.is_deleted = is_deleted;
+    this.jumlah = jumlah;
+    this.kd_rekening = kd_rekening;
+    this.keterangan = keterangan;
+    this.ntb = ntb;
+    this.omset = omset;
+    this.pad_tahun_id = pad_tahun_id;
+    this.ref_id = ref_id;
+    this.satuan = satuan;
+    this.status = status;
+    this.tahun = tahun;
+    this.tanggal_lapor = tanggal_lapor;
+    this.tmpad_id = tmpad_id;
+    this.tmwajib_pajak_id = tmwajib_pajak_id;
+    this.updated_at = updated_at;
+    this.updated_by = updated_by;
+    this.volume = volume;
+  }
+
+  public MultipartFile getBukti_bayar() {
     return bukti_bayar;
   }
 
-  public void setBukti_bayar(String bukti_bayar) {
+  public void setBukti_bayar(MultipartFile bukti_bayar) {
     this.bukti_bayar = bukti_bayar;
   }
 
@@ -220,56 +270,6 @@ public class Estpdmodel {
   }
 
   public void setVolume(String volume) {
-    this.volume = volume;
-  }
-
-  public Estpdmodel(
-    String bukti_bayar,
-    String bunga,
-    String created_at,
-    String created_by,
-    String denda,
-    String id,
-    String is_deleted,
-    String jumlah,
-    String kd_rekening,
-    String keterangan,
-    String ntb,
-    String omset,
-    String pad_tahun_id,
-    String ref_id,
-    String satuan,
-    String status,
-    String tahun,
-    String tanggal_lapor,
-    String tmpad_id,
-    String tmwajib_pajak_id,
-    String updated_at,
-    String updated_by,
-    String volume
-  ) {
-    this.bukti_bayar = bukti_bayar;
-    this.bunga = bunga;
-    this.created_at = created_at;
-    this.created_by = created_by;
-    this.denda = denda;
-    this.id = id;
-    this.is_deleted = is_deleted;
-    this.jumlah = jumlah;
-    this.kd_rekening = kd_rekening;
-    this.keterangan = keterangan;
-    this.ntb = ntb;
-    this.omset = omset;
-    this.pad_tahun_id = pad_tahun_id;
-    this.ref_id = ref_id;
-    this.satuan = satuan;
-    this.status = status;
-    this.tahun = tahun;
-    this.tanggal_lapor = tanggal_lapor;
-    this.tmpad_id = tmpad_id;
-    this.tmwajib_pajak_id = tmwajib_pajak_id;
-    this.updated_at = updated_at;
-    this.updated_by = updated_by;
     this.volume = volume;
   }
 }
