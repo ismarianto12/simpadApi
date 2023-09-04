@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,18 +43,36 @@ public class EsptpdController {
 
   @PostMapping
   public ResponseEntity<Map<String, Object>> insert(
-    @RequestPart MultipartFile file
-    // @RequestPart Estpdmodel esptpdmodel
+    Estpdmodel esptpdmodel,
+    @RequestParam("file") MultipartFile file,
+    // @RequestParam("bukti_bayar") String bukti_bayar,
+    @RequestParam("bunga") String bunga
+    // @RequestParam("denda") String denda,
+    // @RequestParam("is_deleted") String is_deleted,
+    // @RequestParam("jumlah") String jumlah,
+    // @RequestParam("kd_rekening") String kd_rekening,
+    // @RequestParam("keterangan") String keterangan,
+    // @RequestParam("ntb") String ntb,
+    // @RequestParam("omset") String omset,
+    // @RequestParam("pad_tahun_id") String pad_tahun_id,
+    // @RequestParam("ref_id") String ref_id,
+    // @RequestParam("satuan") String satuan,
+    // @RequestParam("status") String status,
+    // @RequestParam("tahun") String tahun,
+    // @RequestParam("tanggal_lapor") String tanggal_lapor
   ) {
     try {
-      String exampletoken = "testing";
+      String exampletoken = "Berhasil";
       String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-      // esptpdmodel.setBukti_bayar(fileName);
-      // esptpdservice.save(esptpdmodel);
+      esptpdmodel.setBukti_bayar(fileName);
+      esptpdmodel.setBunga(bunga);
+      esptpdservice.save(esptpdmodel);
+
       String uploadDir = "uploads/";
       FileUploadUtil.saveFile(uploadDir, fileName, file);
-
-      return ResponseEntity.ok().build();
+      Map<String, Object> response = new HashMap<>();
+      response.put("messages", "berhasil di update");
+      return ResponseEntity.ok(response);
     } catch (Exception e) {
       Map<String, Object> response = new HashMap<>();
       response.put("messages", e.getMessage());
