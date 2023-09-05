@@ -45,26 +45,41 @@ public class EsptpdController {
   public ResponseEntity<Map<String, Object>> insert(
     Estpdmodel esptpdmodel,
     @RequestParam("file") MultipartFile file,
-    // @RequestParam("bukti_bayar") String bukti_bayar,
-    @RequestParam("bunga") String bunga
-    // @RequestParam("denda") String denda,
-    // @RequestParam("is_deleted") String is_deleted,
-    // @RequestParam("jumlah") String jumlah,
-    // @RequestParam("kd_rekening") String kd_rekening,
-    // @RequestParam("keterangan") String keterangan,
-    // @RequestParam("ntb") String ntb,
-    // @RequestParam("omset") String omset,
-    // @RequestParam("pad_tahun_id") String pad_tahun_id,
-    // @RequestParam("ref_id") String ref_id,
-    // @RequestParam("satuan") String satuan,
-    // @RequestParam("status") String status,
-    // @RequestParam("tahun") String tahun,
-    // @RequestParam("tanggal_lapor") String tanggal_lapor
+    @RequestParam("bukti_bayar") String bukti_bayar,
+    @RequestParam("bunga") String bunga,
+    @RequestParam("denda") String denda,
+    @RequestParam("is_deleted") String is_deleted,
+    @RequestParam("jumlah") String jumlah,
+    @RequestParam("kd_rekening") String kd_rekening,
+    @RequestParam("keterangan") String keterangan,
+    @RequestParam("ntb") String ntb,
+    @RequestParam("omset") String omset,
+    @RequestParam("pad_tahun_id") String pad_tahun_id,
+    @RequestParam("ref_id") String ref_id,
+    @RequestParam("satuan") String satuan,
+    @RequestParam("status") String status,
+    @RequestParam("tahun") String tahun,
+    @RequestParam("tanggal_lapor") String tanggal_lapor
   ) {
     try {
       String exampletoken = "Berhasil";
       String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-      esptpdmodel.setBukti_bayar(fileName);
+
+      System.out.printf(fileName, "/n");
+      esptpdmodel.setBukti_bayar(fileName.toString());
+      esptpdmodel.setDenda(denda);
+      esptpdmodel.setIs_deleted(is_deleted);
+      esptpdmodel.setJumlah(jumlah);
+      esptpdmodel.setKd_rekening(kd_rekening);
+      esptpdmodel.setKeterangan(keterangan);
+      esptpdmodel.setNtb(ntb);
+      esptpdmodel.setOmset(omset);
+      esptpdmodel.setPad_tahun_id(pad_tahun_id);
+      esptpdmodel.setRef_id(ref_id);
+      esptpdmodel.setSatuan(satuan);
+      esptpdmodel.setStatus(status);
+      esptpdmodel.setTahun(tahun);
+      esptpdmodel.setTanggal_lapor(tanggal_lapor);
       esptpdmodel.setBunga(bunga);
       esptpdservice.save(esptpdmodel);
 
