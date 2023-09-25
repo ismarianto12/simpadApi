@@ -37,8 +37,12 @@ public class EsptpdController {
   private JdbcTemplate jdbcTemplate;
 
   @GetMapping("all")
-  public Iterable<Estpdmodel> getAll() {
-    return esptpdservice.findAll();
+  public ResponseEntity<Map<String, Object>> getAll() {
+    String query = "SELECT * from esptpd";
+    List<Map<String, Object>> resdata = jdbcTemplate.queryForList(query);
+    Map<String, Object> response = new HashMap<>();
+    response.put("data", resdata);
+    return ResponseEntity.ok(response);
   }
 
   @PostMapping

@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "esptpd")
@@ -12,15 +13,24 @@ public class Estpdmodel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  // @NotNull(message = "Bunga Bayar Is Reqiuired")
   private String bukti_bayar;
 
+  // @NotNull(message = "Bunga Bayar Is Reqiuired")
   private String bunga;
+
   private String created_at;
   private String created_by;
+
+  // @NotNull(message = "Denda Is Reqiuired")
   private String denda;
+
   private String id;
   private String is_deleted;
+
+  // @NotNull(message = "Jumlah Is Reqiuired")
   private String jumlah;
+
   private String kd_rekening;
   private String keterangan;
   private String ntb;
@@ -28,7 +38,10 @@ public class Estpdmodel {
   private String pad_tahun_id;
   private String ref_id;
   private String satuan;
+
+  // @NotNull(message = "Status Is Reqiuired")
   private String status;
+
   private String tahun;
   private String tanggal_lapor;
   private String tmpad_id;
