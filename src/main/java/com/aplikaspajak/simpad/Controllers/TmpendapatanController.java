@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,31 +43,29 @@ public class TmpendapatanController {
 
   @PostMapping("pendapatan/insert")
   public ResponseEntity<Map<String, Object>> simpanData(
-    @RequestBody Estpdmodel modeldata
+    @RequestBody Estpdmodel modeldata,
+    @RequestParam("file") MultipartFile file
   ) {
-    Map<String, Object> res = new HashMap<>();
+    try {
+      Map<String, Object> res = new HashMap<>();
 
-    modeldata.setDenda(modeldata.getDenda());
-    modeldata.setStatus(modeldata.getStatus());
-    modeldata.setBunga(modeldata.getBunga());
-    modeldata.setBukti_bayar(modeldata.getBukti_bayar());
+      modeldata.setDenda(modeldata.getDenda());
+      modeldata.setStatus(modeldata.getStatus());
+      modeldata.setBunga(modeldata.getBunga());
+      modeldata.setBukti_bayar(modeldata.getBukti_bayar());
 
-    String fileName = StringUtils.cleanPath(modeldata.getBukti_bayar());
-    String uploadDir = "uploads/";
-    boolean uploadfile = FileUploadUtil.saveFile(uploadDir, fileName, fileName);
-
-    if (uploadfile) {
+      String fileName = StringUtils.cleanPath(modeldata.getBukti_bayar());
+      String uploadDir = "uploads/";
+      FileUploadUtil.saveFile(uploadDir, fileName, file);
       esptpdservice.save(modeldata);
-
       res.put("response", "200");
-
       res.put("messages", "data berhasil di simpan .");
-    } else {
-      res.put("response", "200");
 
-      res.put("messages", "data berhasil di simpan .");
+      return ResponseEntity.ok(res);
+    } catch (Exception e) {
+      Map<String, Object> res = new HashMap<>();
+      res.put("response", e.getMessage());
+      return ResponseEntity.ok(res);
     }
-
-    return ResponseEntity.ok(res);
   }
 }
