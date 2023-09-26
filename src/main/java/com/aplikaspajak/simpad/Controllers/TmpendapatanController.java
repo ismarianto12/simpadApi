@@ -7,6 +7,8 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-@RestController
+@Controller
 public class TmpendapatanController {
 
   @Autowired
@@ -67,5 +69,17 @@ public class TmpendapatanController {
       res.put("response", e.getMessage());
       return ResponseEntity.ok(res);
     }
+  }
+
+  @GetMapping("/pendapatanview")
+  public String getView(Model model) {
+    Map<String, String> data = new HashMap<>();
+    data.put("TEST", "asda");
+    data.put("adsada", "asdada");
+    model.addAttribute("message", "Hello, Worlds!");
+    model.addAttribute("title", "Sistem Perpajakan Daerahs");
+    model.addAttribute("listdata", data);
+
+    return "myView";
   }
 }
