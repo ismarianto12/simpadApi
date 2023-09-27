@@ -1,7 +1,9 @@
 package com.aplikaspajak.simpad.Controllers;
 
 import com.aplikaspajak.simpad.Models.Estpdmodel;
+import com.aplikaspajak.simpad.Models.Padmodel;
 import com.aplikaspajak.simpad.Services.Esptpdservice;
+import com.aplikaspajak.simpad.Services.Padservice;
 import com.aplikaspajak.simpad.Utils.FileUploadUtil;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class TmpendapatanController {
 
   @Autowired
   private Esptpdservice esptpdservice;
+
+  @Autowired
+  private Padservice padservice;
 
   @GetMapping("tmpendapatan/list")
   public ResponseEntity<Map<String, Object>> Alldata() {
@@ -71,6 +76,15 @@ public class TmpendapatanController {
     }
   }
 
+  /**
+   * @return
+   */
+  public String getallYear() {
+    final String query = "select tahun from pad_tahun limit 1";
+    final String padtahun = jdbctemplate.queryForObject(query, String.class);
+    return padtahun;
+  }
+
   @GetMapping("/pendapatanview")
   public String getView(Model model) {
     Map<String, String> data = new HashMap<>();
@@ -81,5 +95,25 @@ public class TmpendapatanController {
     model.addAttribute("listdata", data);
 
     return "myView";
+  }
+
+  @GetMapping("/realisasipad")
+  public String Getrealisasi(Model model) {
+    Map<String, Object> arrdata = new HashMap<>();
+    Iterable<Padmodel> pajak = padservice.findAll();
+
+    var padtahun = getallYear();
+
+    arrdata.put("Halaman", "Dashboard Realisasi");
+    arrdata.put("padtahun", padtahun);
+    // arrdata.put("TahunPad",padtahun);
+
+    model.addAttribute("resdata", arrdata);
+    model.addAttribute("pajak", pajak);
+    return "/frontend/realisasi";
+  }
+
+  private Object getTahunActive() {
+    return getallYear();
   }
 }
