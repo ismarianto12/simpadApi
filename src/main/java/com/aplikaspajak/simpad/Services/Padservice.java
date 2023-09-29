@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,7 @@ public class Padservice {
     padrepo.deleteById(id);
   }
 
+  // @Query("")
   public List<Map<String, Object>> getAllPad() {
     String string =
       "select sum(jumlah) as jumlah,esptdp.nama from esptpd order by id";
