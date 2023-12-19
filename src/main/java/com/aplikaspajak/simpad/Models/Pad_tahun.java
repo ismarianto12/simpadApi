@@ -14,7 +14,7 @@ public class Pad_tahun {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private String id;
+  private Long id;
 
   private String tahun;
   private String active;
@@ -23,11 +23,13 @@ public class Pad_tahun {
   private String updated_by;
   private String updated_at;
 
-  public String getId() {
+  public Pad_tahun() {}
+
+  public Long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

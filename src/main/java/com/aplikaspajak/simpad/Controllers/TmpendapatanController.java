@@ -93,8 +93,26 @@ public class TmpendapatanController {
     model.addAttribute("message", "Hello, Worlds!");
     model.addAttribute("title", "Sistem Perpajakan Daerahs");
     model.addAttribute("listdata", data);
-
+    model.addAttribute("tanggal", getallYear());
     return "myView";
+  }
+
+  @GetMapping("/loginapp")
+  public String LoginPage(Model model) {
+    Map<String, Object> formdata = new HashMap<>();
+    formdata.put("login", "Halaman Login Page");
+    model.addAttribute("login", "Login Page.");
+    return "/frontend/login";
+  }
+
+  @GetMapping("/dashboard")
+  public String Dashboard(Model model) {
+    try {
+      model.addAttribute("title", "Welcome Dashboard");
+      return "/frontend/dashboard";
+    } catch (Exception e) {
+      return e.getMessage();
+    }
   }
 
   @GetMapping("/realisasipad")

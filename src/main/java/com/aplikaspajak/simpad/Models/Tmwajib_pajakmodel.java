@@ -9,8 +9,8 @@ import javax.persistence.Table;
 // import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "esptpd")
-public class Estpdmodel {
+@Table(name = "tmwajib_pajak")
+public class Tmwajib_pajakmodel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,9 +53,9 @@ public class Estpdmodel {
   private String updated_by;
   private String volume;
 
-  public Estpdmodel() {}
+  public Tmwajib_pajakmodel() {}
 
-  public Estpdmodel(
+  public Tmwajib_pajakmodel(
     String bukti_bayar,
     String bunga,
     String created_at,

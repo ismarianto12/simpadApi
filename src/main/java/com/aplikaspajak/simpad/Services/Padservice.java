@@ -36,7 +36,14 @@ public class Padservice {
     padrepo.deleteById(id);
   }
 
-  // @Query("")
+  public List<Map<String, Object>> GetPad(Long id) {
+    List<Map<String, Object>> query = jdbctemplate.queryForList(
+      "select * from esptpd where id=",
+      id
+    );
+    return query;
+  }
+
   public List<Map<String, Object>> getAllPad() {
     String string =
       "select sum(jumlah) as jumlah,esptdp.nama from esptpd order by id";

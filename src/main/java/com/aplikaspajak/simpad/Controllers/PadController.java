@@ -72,6 +72,8 @@ public class PadController {
   ) {
     try {
       padservice.findOne(id);
+      //string  = request.get("name");
+
       //   padmodel.setKode(request.getKode());
       //   padmodel.setKode(request.getNama());
       //   padmodel.setTarif_pajak(request.getTarif_pajak());
@@ -102,5 +104,4 @@ public class PadController {
       return ResponseEntity.ok(response);
     }
   }
-
 }

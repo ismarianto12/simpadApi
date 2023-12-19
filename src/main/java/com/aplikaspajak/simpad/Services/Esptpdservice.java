@@ -53,6 +53,7 @@ public class Esptpdservice {
       } catch (Exception e) {
         System.err.println(e);
         uploadsuccess = false;
+        System.out.println(e.getMessage());
       }
     }
     return uploadsuccess;
