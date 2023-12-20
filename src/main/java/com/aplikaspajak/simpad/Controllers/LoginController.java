@@ -3,6 +3,7 @@ package com.aplikaspajak.simpad.Controllers;
 import com.aplikaspajak.simpad.Models.UserModel;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -44,7 +45,7 @@ public class LoginController {
     } else {
       mapdata.put("response", matchPas);
       mapdata.put("messages", "Username dan password anda salah.");
-      return ResponseEntity.badRequest().body(mapdata);
+      return new ResponseEntity<>(mapdata, HttpStatus.BAD_REQUEST);
     }
   }
 }

@@ -97,7 +97,7 @@ public class TmpendapatanController {
     return "myView";
   }
 
-  @GetMapping("/loginapp")
+  @GetMapping("/")
   public String LoginPage(Model model) {
     Map<String, Object> formdata = new HashMap<>();
     formdata.put("login", "Halaman Login Page");

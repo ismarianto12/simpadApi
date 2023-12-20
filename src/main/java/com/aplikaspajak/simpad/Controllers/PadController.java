@@ -25,6 +25,7 @@ public class PadController {
   @Autowired
   private Padservice padservice;
 
+  @Autowired
   private Padrepo padrepository;
 
   @PostMapping

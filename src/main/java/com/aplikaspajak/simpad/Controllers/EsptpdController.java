@@ -2,6 +2,7 @@ package com.aplikaspajak.simpad.Controllers;
 
 // import antlr.StringUtils;
 import com.aplikaspajak.simpad.Models.Estpdmodel;
+import com.aplikaspajak.simpad.Repository.Esptpdrepo;
 import com.aplikaspajak.simpad.Services.Esptpdservice;
 import com.aplikaspajak.simpad.Utils.FileUploadUtil;
 import java.util.Collections;
@@ -25,15 +26,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 // import Fileu
-
 @RestController
 @RequestMapping("api/esptpd")
 public class EsptpdController {
 
   @Autowired
+  private Esptpdrepo esptpdrepo;
+
   private Esptpdservice esptpdservice;
 
-  @Autowired
   private JdbcTemplate jdbcTemplate;
 
   @GetMapping("all")
@@ -125,6 +126,33 @@ public class EsptpdController {
 
       response.put("messages", "data berhasil di Edit ");
       return ResponseEntity.ok(response);
+    } catch (Exception e) {
+      Map<String, Object> response = new HashMap<>();
+      response.put("messages", e.getMessage());
+      return ResponseEntity.ok(response);
+    }
+  }
+
+  @GetMapping("/getnpwpd/{id}")
+  public ResponseEntity<Map<String, Object>> findSptpd(
+    @RequestParam("param") String param,
+    @PathVariable Long id
+  ) {
+    try {
+      Map<String, Object> listdata = new HashMap<>();
+      List<Estpdmodel> data = esptpdrepo.findByidData(id);
+      if (param.isBlank()) {
+        listdata.put("Msg", "Parameter Will be present");
+        return new ResponseEntity<>(listdata, HttpStatus.OK);
+      } else if (param.isEmpty()) {
+        listdata.put("Msg", "Parameter Will be present");
+        return new ResponseEntity<>(listdata, HttpStatus.OK);
+      } else {
+        listdata.put("messages", "Request Has Successfully");
+        listdata.put("data", data);
+        listdata.put("Status", "200");
+        return new ResponseEntity<>(listdata, HttpStatus.OK);
+      }
     } catch (Exception e) {
       Map<String, Object> response = new HashMap<>();
       response.put("messages", e.getMessage());

@@ -33,16 +33,13 @@ public class Tmwajibpajakservice {
   public Iterable<Tmwajib_pajakmodel> findAll() {
     return padrepo.findAll();
   }
+
   // Additional methods if needed
-  //   public void save(Tmwajib_pajakmodel pad) {
-  //     return padrepo.save();
-  //   }
+  public Tmwajib_pajakmodel save(Tmwajib_pajakmodel pad) {
+    return padrepo.save(pad);
+  }
 
-  //   public Padmodel findOne(Long id) {
-  //     return padrepo.findById(id).orElse(null);
-  //   }
-
-  //   public Iterable<Padmodel> findAll() {
-  //     return padrepo.findAll();
-  //   }
+  public Tmwajib_pajakmodel findOne(Long id) {
+    return padrepo.findById(id).orElse(null);
+  }
 }

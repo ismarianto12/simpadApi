@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 public interface Esptpdrepo extends CrudRepository<Estpdmodel, Long> {
-  @Query(
-    value = "select * from esptpd where id=:parmeterid",
-    nativeQuery = true
-  )
+  @Query(value = "select * from esptpd where id=?", nativeQuery = true)
   List<Estpdmodel> findByidData(Long parmeterid);
+
+  @Query(value = "select * from esptpd where id=?", nativeQuery = true)
+  List<Estpdmodel> findByidWpBayar(Long parmeterid);
 }
