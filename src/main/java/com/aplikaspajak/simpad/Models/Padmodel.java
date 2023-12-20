@@ -27,7 +27,10 @@ public class Padmodel implements Serializable {
   @NotNull(message = "Kode Tidak Boleh Kosong")
   private String kode;
 
+  @NotNull(message = "Nama Tidak Boleh Kosong")
   private String nama;
+
+  @NotNull(message = "Tarif Pajak Tidak Boleh Kosong")
   private Double tarif_pajak;
 
   public Padmodel() {}

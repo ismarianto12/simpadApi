@@ -7,8 +7,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Validated
 @RequestMapping("/api/paddata")
 public class PadController {
 
@@ -30,18 +35,22 @@ public class PadController {
 
   @PostMapping
   public ResponseEntity<Map<String, Object>> create(
-    @RequestBody Padmodel padmodel
+    @Valid @RequestBody Padmodel padmodel
   ) {
     try {
+      Map<String, Object> response = new HashMap<>();
+      if (padmodel.getKode().isEmpty()) {
+        response.put("Status", "Berhasil");
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+      }
       padservice.save(padmodel);
 
-      Map<String, Object> response = new HashMap<>();
       response.put("Status", "Berhasil");
       return ResponseEntity.ok(response);
     } catch (Exception e) {
       Map<String, Object> response = new HashMap<>();
       response.put("gagal", e);
-      return ResponseEntity.ok(response);
+      return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
     }
   }
 
